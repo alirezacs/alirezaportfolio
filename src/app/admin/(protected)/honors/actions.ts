@@ -1,6 +1,8 @@
 ﻿"use server";
 
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { getDb } from "@/lib/db";
 import {
@@ -9,6 +11,7 @@ import {
   parseNumber,
   parseString,
 } from "@/lib/forms";
+import { locales } from "@/i18n/config";
 
 export async function createHonor(formData: FormData) {
   await requireAdmin();
@@ -26,6 +29,12 @@ export async function createHonor(formData: FormData) {
   };
 
   await db.collection("honors").insertOne(payload);
+  revalidatePath("/admin/honors");
+  for (const locale of locales) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/honors`);
+  }
+  redirect("/admin/honors?created=1");
 }
 
 export async function updateHonor(formData: FormData) {
@@ -50,6 +59,13 @@ export async function updateHonor(formData: FormData) {
   await db
     .collection("honors")
     .updateOne({ _id: new ObjectId(id) }, { $set: payload });
+
+  revalidatePath("/admin/honors");
+  for (const locale of locales) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/honors`);
+  }
+  redirect("/admin/honors?updated=1");
 }
 
 export async function deleteHonor(formData: FormData) {
@@ -62,5 +78,10 @@ export async function deleteHonor(formData: FormData) {
   }
 
   await db.collection("honors").deleteOne({ _id: new ObjectId(id) });
+  revalidatePath("/admin/honors");
+  for (const locale of locales) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/honors`);
+  }
+  redirect("/admin/honors?deleted=1");
 }
-

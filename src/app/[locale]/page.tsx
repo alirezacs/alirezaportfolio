@@ -49,9 +49,7 @@ export default async function HomePage({ params }: HomePageProps) {
     repository: t("labels.repository"),
   };
 
-  const featuredProjects = projects.filter((project) => project.featured);
-  const projectsToShow =
-    featuredProjects.length > 0 ? featuredProjects.slice(0, 2) : projects.slice(0, 2);
+  const projectsToShow = projects;
 
   return (
     <div className="flex flex-col gap-16">
