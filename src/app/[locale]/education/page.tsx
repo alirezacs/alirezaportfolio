@@ -15,7 +15,7 @@ export default async function EducationPage({ params }: EducationPageProps) {
   const localeKey = (resolvedParams?.locale ?? defaultLocale) as LocaleKey;
   setRequestLocale(localeKey);
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale: localeKey });
   const education = await getEducation();
 
   return (

@@ -14,7 +14,7 @@ export default async function HonorsPage({ params }: HonorsPageProps) {
   const localeKey = (resolvedParams?.locale ?? defaultLocale) as LocaleKey;
   setRequestLocale(localeKey);
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale: localeKey });
   const honors = await getHonors();
 
   return (

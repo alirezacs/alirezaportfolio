@@ -29,11 +29,11 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
   const direction = locale === "fa" || locale === "ar" ? "rtl" : "ltr";
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <div dir={direction} lang={locale} className="min-h-screen">
         <SiteHeader />
         <main className="mx-auto w-full max-w-6xl px-6 pb-20 pt-10 md:px-10">

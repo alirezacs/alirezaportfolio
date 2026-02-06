@@ -3,8 +3,8 @@ import { getBio, localizeText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 
 export default async function SiteFooter() {
-  const t = await getTranslations();
   const locale = (await getLocale()) as LocaleKey;
+  const t = await getTranslations({ locale });
   const bio = await getBio();
   const location = localizeText(bio.location, locale);
 

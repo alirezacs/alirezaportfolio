@@ -14,7 +14,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const localeKey = (resolvedParams?.locale ?? defaultLocale) as LocaleKey;
   setRequestLocale(localeKey);
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale: localeKey });
   const projects = await getProjects();
   const projectLabels = {
     featured: t("labels.featured"),

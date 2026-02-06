@@ -27,7 +27,7 @@ export default async function HomePage({ params }: HomePageProps) {
   const locale = localeKey;
   setRequestLocale(localeKey);
 
-  const t = await getTranslations();
+  const t = await getTranslations({ locale: localeKey });
   const [bio, projects, experiences, honors, education] = await Promise.all([
     getBio(),
     getProjects(),
