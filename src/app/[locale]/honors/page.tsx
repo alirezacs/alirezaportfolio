@@ -1,5 +1,5 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
-import { defaultLocale } from "@/i18n";
+import { defaultLocale } from "@/i18n/config";
 import { getHonors, localizeText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import HonorCard from "@/components/honor-card";
@@ -38,3 +38,4 @@ export default async function HonorsPage({ params }: HonorsPageProps) {
     </section>
   );
 }
+

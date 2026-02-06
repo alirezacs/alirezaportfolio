@@ -4,7 +4,7 @@
   --bg: #f8f7f2;
   --surface: #ffffff;
   --ink: #0d1117;
-  --muted: #5a6472;
+  --muted: #4b5563;
   --accent: #1e6f5c;
   --accent-2: #f0b429;
   --border: #e4dfd1;
@@ -17,7 +17,7 @@
   --bg: #0f1216;
   --surface: #151a22;
   --ink: #f4f6f8;
-  --muted: #98a2b3;
+  --muted: #a0a8b5;
   --accent: #65d2a8;
   --accent-2: #f6c453;
   --border: #273142;
@@ -75,12 +75,12 @@ body {
 }
 
 .glass {
-  background: color-mix(in srgb, var(--surface) 84%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
 }
 
 .card {
-  @apply rounded-2xl border border-border bg-surface/80 shadow-[0_18px_40px_rgba(15,20,30,0.08)];
+  @apply rounded-2xl border border-border bg-surface shadow-[0_18px_40px_rgba(15,20,30,0.08)];
 }

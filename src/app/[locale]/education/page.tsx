@@ -1,5 +1,5 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
-import { defaultLocale } from "@/i18n";
+import { defaultLocale } from "@/i18n/config";
 import { getEducation, localizeText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import { formatRange } from "@/lib/format";
@@ -39,3 +39,4 @@ export default async function EducationPage({ params }: EducationPageProps) {
     </section>
   );
 }
+

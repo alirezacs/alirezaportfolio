@@ -1,5 +1,5 @@
 ﻿import Link from "next/link";
-import { defaultLocale } from "@/i18n";
+import { defaultLocale } from "@/i18n/config";
 
 type NotFoundProps = {
   params: Promise<{ locale: string }>;
@@ -22,3 +22,4 @@ export default async function NotFound({ params }: NotFoundProps) {
     </div>
   );
 }
+

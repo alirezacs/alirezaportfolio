@@ -1,5 +1,5 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
-import { defaultLocale } from "@/i18n";
+import { defaultLocale } from "@/i18n/config";
 import { getProjects, localizeText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import ProjectCard from "@/components/project-card";
@@ -46,3 +46,4 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
     </section>
   );
 }
+

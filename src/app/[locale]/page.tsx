@@ -1,6 +1,6 @@
 ﻿import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { defaultLocale } from "@/i18n";
+import { defaultLocale } from "@/i18n/config";
 import {
   getBio,
   getEducation,
@@ -257,3 +257,4 @@ export default async function HomePage({ params }: HomePageProps) {
     </div>
   );
 }
+

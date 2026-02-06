@@ -2,13 +2,15 @@
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
+import { defaultLocale, locales } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 
-const locales = [
-  { value: "en", label: "EN" },
-  { value: "fa", label: "FA" },
-  { value: "tr", label: "TR" },
-  { value: "ar", label: "AR" },
-];
+const localeOptions = locales.map((value) => ({
+  value,
+  label: value.toUpperCase(),
+}));
+
+const localeSet = new Set(locales);
 
 export default function LocaleSwitcher() {
   const router = useRouter();
@@ -16,21 +18,25 @@ export default function LocaleSwitcher() {
   const locale = useLocale();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const nextLocale = event.target.value;
-    const segments = pathname.split("/");
+    const nextLocale = event.target.value as Locale;
+    const safePathname = pathname ?? "/";
+    const segments = safePathname.split("/").filter(Boolean);
+    const firstSegment = segments[0];
+    const rest = localeSet.has(firstSegment as Locale)
+      ? segments.slice(1)
+      : segments;
+    const basePath = rest.join("/");
+    const shouldPrefix = nextLocale !== defaultLocale;
+    const nextPath = "/" +
+      (shouldPrefix
+        ? [nextLocale, basePath].filter(Boolean).join("/")
+        : basePath);
 
-    if (segments.length > 1) {
-      segments[1] = nextLocale;
-    } else {
-      segments.push(nextLocale);
-    }
-
-    const nextPath = segments.join("/") || `/${nextLocale}`;
-    router.replace(nextPath);
+    router.replace(nextPath || "/");
   };
 
   return (
-    <label className="flex items-center gap-2 rounded-full border border-border bg-surface/80 px-3 py-2 text-xs font-medium text-muted">
+    <label className="flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-2 text-xs font-medium text-muted">
       <span className="sr-only">Language</span>
       <select
         aria-label="Language"
@@ -38,7 +44,7 @@ export default function LocaleSwitcher() {
         onChange={handleChange}
         className="bg-transparent text-xs font-semibold text-ink outline-none"
       >
-        {locales.map((option) => (
+        {localeOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

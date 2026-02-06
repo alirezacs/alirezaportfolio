@@ -1,7 +1,7 @@
 ﻿import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { defaultLocale, Locale, locales } from "@/i18n";
+import { defaultLocale, Locale, locales } from "@/i18n/config";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 
@@ -44,3 +44,4 @@ export default async function LocaleLayout({
     </NextIntlClientProvider>
   );
 }
+
