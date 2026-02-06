@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "projects": "Projeler",
+    "experience": "Deneyim",
+    "honors": "Ödüller",
+    "education": "Eğitim",
+    "bio": "Biyografi"
+  },
+  "hero": {
+    "eyebrow": "Sakin ve güçlü dijital ürünler tasarlıyorum",
+    "title": "Full-Stack Geliştirici ve Ürün Üreticisi",
+    "subtitle": "Fikirden yayına kadar çok dilli ve performans odaklı deneyimler üretiyorum.",
+    "ctaPrimary": "Projeleri gör",
+    "ctaSecondary": "İletişime geç"
+  },
+  "sections": {
+    "projects": {
+      "title": "Öne Çıkan Projeler",
+      "subtitle": "UX, hız ve sonuç dengesini kuran son çalışmalar.",
+      "cta": "Tüm projeler"
+    },
+    "experience": {
+      "title": "Deneyim",
+      "subtitle": "Ürünleri nasıl inşa ettiğimi şekillendiren roller.",
+      "cta": "Tüm deneyim"
+    },
+    "honors": {
+      "title": "Ödüller ve Takdirler",
+      "subtitle": "Yol boyunca kazanılan ödüller ve kilometre taşları.",
+      "cta": "Tüm ödüller"
+    },
+    "education": {
+      "title": "Eğitim",
+      "subtitle": "Mühendislik, tasarım ve sistem düşüncesinin temelleri.",
+      "cta": "Eğitim detayları"
+    },
+    "bio": {
+      "title": "Biyografi",
+      "subtitle": "İşin arkasındaki hikâye, değerler ve yaklaşım.",
+      "cta": "Tam biyografi"
+    }
+  },
+  "labels": {
+    "featured": "Öne çıkan",
+    "present": "Şimdi",
+    "languages": "Diller",
+    "stack": "Teknoloji",
+    "liveDemo": "Canlı demo",
+    "repository": "Depo",
+    "location": "Konum",
+    "contact": "İletişim",
+    "email": "E-posta"
+  },
+  "footer": {
+    "tagline": "Web, mobil ve veri için ürün deneyimleri.",
+    "contact": "Birlikte etkili bir şey üretelim."
+  }
+}

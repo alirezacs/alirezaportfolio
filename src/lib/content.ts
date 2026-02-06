@@ -1,0 +1,128 @@
+﻿import { ObjectId } from "mongodb";
+import { getDb } from "./db";
+import {
+  Bio,
+  Education,
+  Experience,
+  Honor,
+  LocalizedText,
+  LocaleKey,
+  Project,
+} from "./types";
+import {
+  defaultBio,
+  defaultEducation,
+  defaultExperiences,
+  defaultHonors,
+  defaultProjects,
+} from "./default-content";
+
+export function localizeText(text: LocalizedText, locale: LocaleKey) {
+  return text?.[locale] || text?.en || "";
+}
+
+export async function getProjects() {
+  try {
+    const db = await getDb();
+    const items = await db
+      .collection<Project>("projects")
+      .find({ published: true })
+      .sort({ order: 1, createdAt: -1 })
+      .toArray();
+
+    return items.length ? items : defaultProjects;
+  } catch {
+    return defaultProjects;
+  }
+}
+
+export async function getExperiences() {
+  try {
+    const db = await getDb();
+    const items = await db
+      .collection<Experience>("experiences")
+      .find({ published: true })
+      .sort({ order: 1, start: -1 })
+      .toArray();
+
+    return items.length ? items : defaultExperiences;
+  } catch {
+    return defaultExperiences;
+  }
+}
+
+export async function getEducation() {
+  try {
+    const db = await getDb();
+    const items = await db
+      .collection<Education>("education")
+      .find({ published: true })
+      .sort({ order: 1, start: -1 })
+      .toArray();
+
+    return items.length ? items : defaultEducation;
+  } catch {
+    return defaultEducation;
+  }
+}
+
+export async function getHonors() {
+  try {
+    const db = await getDb();
+    const items = await db
+      .collection<Honor>("honors")
+      .find({ published: true })
+      .sort({ order: 1, date: -1 })
+      .toArray();
+
+    return items.length ? items : defaultHonors;
+  } catch {
+    return defaultHonors;
+  }
+}
+
+export async function getBio() {
+  try {
+    const db = await getDb();
+    const item = await db.collection<Bio>("bio").findOne({});
+    return item ?? defaultBio;
+  } catch {
+    return defaultBio;
+  }
+}
+
+export async function getProjectById(id: string) {
+  const db = await getDb();
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+  return db.collection<Project>("projects").findOne({ _id: new ObjectId(id) });
+}
+
+export async function getExperienceById(id: string) {
+  const db = await getDb();
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+  return db
+    .collection<Experience>("experiences")
+    .findOne({ _id: new ObjectId(id) });
+}
+
+export async function getEducationById(id: string) {
+  const db = await getDb();
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+  return db
+    .collection<Education>("education")
+    .findOne({ _id: new ObjectId(id) });
+}
+
+export async function getHonorById(id: string) {
+  const db = await getDb();
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+  return db.collection<Honor>("honors").findOne({ _id: new ObjectId(id) });
+}

@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "experience": "Experience",
+    "honors": "Honors",
+    "education": "Education",
+    "bio": "Biography"
+  },
+  "hero": {
+    "eyebrow": "Designing calm, capable digital products",
+    "title": "Full-Stack Developer & Product Builder",
+    "subtitle": "I craft multilingual, performance-focused experiences that move ideas from concept to launch.",
+    "ctaPrimary": "View projects",
+    "ctaSecondary": "Get in touch"
+  },
+  "sections": {
+    "projects": {
+      "title": "Selected Projects",
+      "subtitle": "Recent builds that balance UX, speed, and business outcomes.",
+      "cta": "All projects"
+    },
+    "experience": {
+      "title": "Experience",
+      "subtitle": "Roles and partnerships that shaped how I build products.",
+      "cta": "Full experience"
+    },
+    "honors": {
+      "title": "Honors & Recognition",
+      "subtitle": "Awards, challenges, and milestones along the way.",
+      "cta": "All honors"
+    },
+    "education": {
+      "title": "Education",
+      "subtitle": "Foundations in engineering, design, and systems thinking.",
+      "cta": "Education details"
+    },
+    "bio": {
+      "title": "Biography",
+      "subtitle": "The story, values, and approach behind the work.",
+      "cta": "Read full bio"
+    }
+  },
+  "labels": {
+    "featured": "Featured",
+    "present": "Present",
+    "languages": "Languages",
+    "stack": "Stack",
+    "liveDemo": "Live demo",
+    "repository": "Repository",
+    "location": "Location",
+    "contact": "Contact",
+    "email": "Email"
+  },
+  "footer": {
+    "tagline": "Crafting product experiences across web, mobile, and data.",
+    "contact": "Let’s build something thoughtful together."
+  }
+}
