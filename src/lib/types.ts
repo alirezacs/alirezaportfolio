@@ -8,9 +8,9 @@ export type LocalizedArray = Record<LocaleKey, string[]>;
 export type Project = {
   _id?: ObjectId;
   slug: string;
-  title: LocalizedText;
-  summary: LocalizedText;
-  description: LocalizedText;
+  title: string | LocalizedText;
+  summary: string | LocalizedText;
+  description: string | LocalizedText;
   tech: string[];
   demoUrl?: string;
   repoUrl?: string;

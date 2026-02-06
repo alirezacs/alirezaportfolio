@@ -1,4 +1,4 @@
-﻿import { CheckboxField, Field, LocalizedField } from "./fields";
+﻿import { CheckboxField, Field, TextAreaField } from "./fields";
 import type { Project } from "@/lib/types";
 
 type ProjectFormProps = {
@@ -12,6 +12,19 @@ export default function ProjectForm({
   defaultValues,
   submitLabel,
 }: ProjectFormProps) {
+  const titleValue =
+    typeof defaultValues?.title === "string"
+      ? defaultValues.title
+      : defaultValues?.title?.en ?? "";
+  const summaryValue =
+    typeof defaultValues?.summary === "string"
+      ? defaultValues.summary
+      : defaultValues?.summary?.en ?? "";
+  const descriptionValue =
+    typeof defaultValues?.description === "string"
+      ? defaultValues.description
+      : defaultValues?.description?.en ?? "";
+
   return (
     <form action={action} className="flex flex-col gap-6">
       {defaultValues?._id ? (
@@ -31,23 +44,17 @@ export default function ProjectForm({
           defaultValue={defaultValues?.order ?? 0}
         />
       </div>
-      <LocalizedField
-        label="Title"
-        name="title"
-        defaultValue={defaultValues?.title}
-      />
-      <LocalizedField
+      <Field label="Title" name="title" defaultValue={titleValue} />
+      <TextAreaField
         label="Summary"
         name="summary"
-        defaultValue={defaultValues?.summary}
-        as="textarea"
+        defaultValue={summaryValue}
         rows={3}
       />
-      <LocalizedField
+      <TextAreaField
         label="Description"
         name="description"
-        defaultValue={defaultValues?.description}
-        as="textarea"
+        defaultValue={descriptionValue}
         rows={4}
       />
       <div className="grid gap-4 md:grid-cols-2">

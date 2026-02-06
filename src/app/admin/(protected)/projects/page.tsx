@@ -36,7 +36,9 @@ export default async function ProjectsAdminPage() {
             >
               <div>
                 <p className="text-sm font-semibold text-ink">
-                  {project.title.en}
+                  {typeof project.title === "string"
+                    ? project.title
+                    : project.title.en}
                 </p>
                 <p className="text-xs text-muted">
                   {project.published ? "Published" : "Draft"} · Order {project.order}

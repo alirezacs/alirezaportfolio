@@ -8,6 +8,7 @@ import {
   getHonors,
   getProjects,
   localizeText,
+  resolveText,
 } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import { formatRange, splitParagraphs } from "@/lib/format";
@@ -138,8 +139,8 @@ export default async function HomePage({ params }: HomePageProps) {
             {projectsToShow.map((project) => (
               <ProjectCard
                 key={project.slug}
-                title={localizeText(project.title, localeKey)}
-                summary={localizeText(project.summary, localeKey)}
+              title={resolveText(project.title, localeKey)}
+              summary={resolveText(project.summary, localeKey)}
                 tech={project.tech}
                 demoUrl={project.demoUrl}
                 repoUrl={project.repoUrl}

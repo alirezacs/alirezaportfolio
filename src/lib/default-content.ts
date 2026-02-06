@@ -10,11 +10,11 @@ const text = (value: string): LocalizedText => ({
 export const defaultProjects: Project[] = [
   {
     slug: "atlas-notes",
-    title: text("Atlas Notes"),
-    summary: text("A multilingual research notebook with fast search, smart tags, and structured citations."),
-    description: text(
-      "Designed a knowledge workspace for long-form research with semantic search, inline citations, and export-ready reports."
-    ),
+    title: "Atlas Notes",
+    summary:
+      "A multilingual research notebook with fast search, smart tags, and structured citations.",
+    description:
+      "Designed a knowledge workspace for long-form research with semantic search, inline citations, and export-ready reports.",
     tech: ["Next.js", "MongoDB", "TypeScript", "Elastic UI"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",
@@ -26,11 +26,11 @@ export const defaultProjects: Project[] = [
   },
   {
     slug: "pulseboard",
-    title: text("Pulseboard"),
-    summary: text("A real-time analytics dashboard for product teams with alerting and cohort insights."),
-    description: text(
-      "Built a responsive dashboard that consolidates metrics, experiments, and customer health signals into a single workspace."
-    ),
+    title: "Pulseboard",
+    summary:
+      "A real-time analytics dashboard for product teams with alerting and cohort insights.",
+    description:
+      "Built a responsive dashboard that consolidates metrics, experiments, and customer health signals into a single workspace.",
     tech: ["Next.js", "Node.js", "PostgreSQL", "Redis"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",
@@ -42,11 +42,11 @@ export const defaultProjects: Project[] = [
   },
   {
     slug: "fieldcraft",
-    title: text("FieldCraft"),
-    summary: text("A mobile-first reporting suite for distributed field teams and remote inspections."),
-    description: text(
-      "Launched a mobile workflow that enables offline capture, automated checklists, and audit-ready exports."
-    ),
+    title: "FieldCraft",
+    summary:
+      "A mobile-first reporting suite for distributed field teams and remote inspections.",
+    description:
+      "Launched a mobile workflow that enables offline capture, automated checklists, and audit-ready exports.",
     tech: ["Next.js", "React Native", "MongoDB", "Mapbox"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",

@@ -17,6 +17,14 @@ export function localizeText(
   return text?.[locale] || text?.en || "";
 }
 
+export function resolveText(
+  value: string | LocalizedText | null | undefined,
+  locale: LocaleKey
+) {
+  if (!value) return "";
+  return typeof value === "string" ? value : localizeText(value, locale);
+}
+
 export async function getProjects() {
   try {
     const db = await getDb();

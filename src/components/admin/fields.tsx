@@ -88,6 +88,32 @@ export function Field({
   );
 }
 
+type TextAreaFieldProps = {
+  label: string;
+  name: string;
+  defaultValue?: string;
+  rows?: number;
+};
+
+export function TextAreaField({
+  label,
+  name,
+  defaultValue,
+  rows = 4,
+}: TextAreaFieldProps) {
+  return (
+    <label className="flex flex-col gap-2 text-xs font-semibold text-muted">
+      {label}
+      <textarea
+        name={name}
+        defaultValue={defaultValue}
+        rows={rows}
+        className="rounded-xl border border-border bg-white/80 px-4 py-2 text-sm text-ink outline-none focus:border-ink/30"
+      />
+    </label>
+  );
+}
+
 type CheckboxFieldProps = {
   label: string;
   name: string;

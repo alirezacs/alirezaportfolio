@@ -1,6 +1,6 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { defaultLocale } from "@/i18n/config";
-import { getProjects, localizeText } from "@/lib/content";
+import { getProjects, resolveText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import ProjectCard from "@/components/project-card";
 import SectionHeading from "@/components/section-heading";
@@ -33,8 +33,8 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
           {projects.map((project) => (
             <ProjectCard
               key={project.slug}
-              title={localizeText(project.title, localeKey)}
-              summary={localizeText(project.summary, localeKey)}
+            title={resolveText(project.title, localeKey)}
+            summary={resolveText(project.summary, localeKey)}
               tech={project.tech}
             demoUrl={project.demoUrl}
             repoUrl={project.repoUrl}

@@ -5,7 +5,6 @@ import { requireAdmin } from "@/lib/auth";
 import { getDb } from "@/lib/db";
 import {
   parseBoolean,
-  parseLocalizedText,
   parseNumber,
   parseString,
   parseStringArray,
@@ -22,13 +21,13 @@ const slugify = (value: string) =>
 export async function createProject(formData: FormData) {
   await requireAdmin();
   const db = await getDb();
-  const title = parseLocalizedText(formData, "title");
-  const summary = parseLocalizedText(formData, "summary");
-  const description = parseLocalizedText(formData, "description");
+  const title = parseString(formData, "title");
+  const summary = parseString(formData, "summary");
+  const description = parseString(formData, "description");
   const slugInput = parseString(formData, "slug");
 
   const payload = {
-    slug: slugInput || slugify(title.en || "project"),
+    slug: slugInput || slugify(title || "project"),
     title,
     summary,
     description,
@@ -56,13 +55,13 @@ export async function updateProject(formData: FormData) {
     return;
   }
 
-  const title = parseLocalizedText(formData, "title");
-  const summary = parseLocalizedText(formData, "summary");
-  const description = parseLocalizedText(formData, "description");
+  const title = parseString(formData, "title");
+  const summary = parseString(formData, "summary");
+  const description = parseString(formData, "description");
   const slugInput = parseString(formData, "slug");
 
   const payload = {
-    slug: slugInput || slugify(title.en || "project"),
+    slug: slugInput || slugify(title || "project"),
     title,
     summary,
     description,
