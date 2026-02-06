@@ -5,12 +5,13 @@ import HonorCard from "@/components/honor-card";
 import SectionHeading from "@/components/section-heading";
 
 type HonorsPageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function HonorsPage({ params }: HonorsPageProps) {
-  const locale = params.locale as LocaleKey;
-  setRequestLocale(locale);
+  const { locale } = await params;
+  const localeKey = locale as LocaleKey;
+  setRequestLocale(localeKey);
 
   const t = await getTranslations();
   const honors = await getHonors();
@@ -25,9 +26,9 @@ export default async function HonorsPage({ params }: HonorsPageProps) {
         {honors.map((honor, index) => (
           <HonorCard
             key={`${honor.title.en}-${index}`}
-            title={localizeText(honor.title, locale)}
-            issuer={localizeText(honor.issuer, locale)}
-            summary={localizeText(honor.summary, locale)}
+            title={localizeText(honor.title, localeKey)}
+            issuer={localizeText(honor.issuer, localeKey)}
+            summary={localizeText(honor.summary, localeKey)}
             date={honor.date}
             url={honor.url}
           />

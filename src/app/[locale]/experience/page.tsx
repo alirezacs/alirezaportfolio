@@ -6,12 +6,13 @@ import ExperienceCard from "@/components/experience-card";
 import SectionHeading from "@/components/section-heading";
 
 type ExperiencePageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function ExperiencePage({ params }: ExperiencePageProps) {
-  const locale = params.locale as LocaleKey;
-  setRequestLocale(locale);
+  const { locale } = await params;
+  const localeKey = locale as LocaleKey;
+  setRequestLocale(localeKey);
 
   const t = await getTranslations();
   const experiences = await getExperiences();
@@ -26,14 +27,14 @@ export default async function ExperiencePage({ params }: ExperiencePageProps) {
         {experiences.map((experience, index) => (
           <ExperienceCard
             key={`${experience.company.en}-${index}`}
-            role={localizeText(experience.role, locale)}
-            company={localizeText(experience.company, locale)}
-            summary={localizeText(experience.summary, locale)}
-            location={localizeText(experience.location, locale)}
+            role={localizeText(experience.role, localeKey)}
+            company={localizeText(experience.company, localeKey)}
+            summary={localizeText(experience.summary, localeKey)}
+            location={localizeText(experience.location, localeKey)}
             period={formatRange(
               experience.start,
               experience.end || "",
-              locale,
+              localeKey,
               t("labels.present")
             )}
           />

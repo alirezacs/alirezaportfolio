@@ -17,12 +17,13 @@ import EducationCard from "@/components/education-card";
 import HonorCard from "@/components/honor-card";
 
 type HomePageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function HomePage({ params }: HomePageProps) {
-  const locale = params.locale as LocaleKey;
-  setRequestLocale(locale);
+  const { locale } = await params;
+  const localeKey = locale as LocaleKey;
+  setRequestLocale(localeKey);
 
   const t = await getTranslations();
   const [bio, projects, experiences, honors, education] = await Promise.all([
@@ -33,9 +34,9 @@ export default async function HomePage({ params }: HomePageProps) {
     getEducation(),
   ]);
 
-  const headline = localizeText(bio.headline, locale) || t("hero.title");
-  const summary = localizeText(bio.summary, locale) || t("hero.subtitle");
-  const story = localizeText(bio.story, locale);
+  const headline = localizeText(bio.headline, localeKey) || t("hero.title");
+  const summary = localizeText(bio.summary, localeKey) || t("hero.subtitle");
+  const story = localizeText(bio.story, localeKey);
   const storyParagraphs = splitParagraphs(story).slice(0, 2);
   const projectLabels = {
     featured: t("labels.featured"),
@@ -122,8 +123,8 @@ export default async function HomePage({ params }: HomePageProps) {
           {projectsToShow.map((project) => (
             <ProjectCard
               key={project.slug}
-              title={localizeText(project.title, locale)}
-              summary={localizeText(project.summary, locale)}
+              title={localizeText(project.title, localeKey)}
+              summary={localizeText(project.summary, localeKey)}
               tech={project.tech}
               demoUrl={project.demoUrl}
               repoUrl={project.repoUrl}
@@ -153,14 +154,14 @@ export default async function HomePage({ params }: HomePageProps) {
             {experiences.slice(0, 2).map((experience, index) => (
               <ExperienceCard
                 key={`${experience.company.en}-${index}`}
-                role={localizeText(experience.role, locale)}
-                company={localizeText(experience.company, locale)}
-                summary={localizeText(experience.summary, locale)}
-                location={localizeText(experience.location, locale)}
+                role={localizeText(experience.role, localeKey)}
+                company={localizeText(experience.company, localeKey)}
+                summary={localizeText(experience.summary, localeKey)}
+                location={localizeText(experience.location, localeKey)}
                 period={formatRange(
                   experience.start,
                   experience.end || "",
-                  locale,
+                  localeKey,
                   t("labels.present")
                 )}
               />
@@ -215,9 +216,9 @@ export default async function HomePage({ params }: HomePageProps) {
             {honors.slice(0, 2).map((honor, index) => (
               <HonorCard
                 key={`${honor.title.en}-${index}`}
-                title={localizeText(honor.title, locale)}
-                issuer={localizeText(honor.issuer, locale)}
-                summary={localizeText(honor.summary, locale)}
+                title={localizeText(honor.title, localeKey)}
+                issuer={localizeText(honor.issuer, localeKey)}
+                summary={localizeText(honor.summary, localeKey)}
                 date={honor.date}
                 url={honor.url}
               />
@@ -241,11 +242,11 @@ export default async function HomePage({ params }: HomePageProps) {
             {education.slice(0, 2).map((entry, index) => (
               <EducationCard
                 key={`${entry.school.en}-${index}`}
-                degree={localizeText(entry.degree, locale)}
-                school={localizeText(entry.school, locale)}
-                field={localizeText(entry.field, locale)}
-                summary={localizeText(entry.summary, locale)}
-                period={formatRange(entry.start, entry.end, locale, t("labels.present"))}
+                degree={localizeText(entry.degree, localeKey)}
+                school={localizeText(entry.school, localeKey)}
+                field={localizeText(entry.field, localeKey)}
+                summary={localizeText(entry.summary, localeKey)}
+                period={formatRange(entry.start, entry.end, localeKey, t("labels.present"))}
               />
             ))}
           </div>

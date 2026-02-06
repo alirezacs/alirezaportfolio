@@ -6,12 +6,13 @@ import EducationCard from "@/components/education-card";
 import SectionHeading from "@/components/section-heading";
 
 type EducationPageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function EducationPage({ params }: EducationPageProps) {
-  const locale = params.locale as LocaleKey;
-  setRequestLocale(locale);
+  const { locale } = await params;
+  const localeKey = locale as LocaleKey;
+  setRequestLocale(localeKey);
 
   const t = await getTranslations();
   const education = await getEducation();
@@ -26,11 +27,11 @@ export default async function EducationPage({ params }: EducationPageProps) {
         {education.map((entry, index) => (
           <EducationCard
             key={`${entry.school.en}-${index}`}
-            degree={localizeText(entry.degree, locale)}
-            school={localizeText(entry.school, locale)}
-            field={localizeText(entry.field, locale)}
-            summary={localizeText(entry.summary, locale)}
-            period={formatRange(entry.start, entry.end, locale, t("labels.present"))}
+            degree={localizeText(entry.degree, localeKey)}
+            school={localizeText(entry.school, localeKey)}
+            field={localizeText(entry.field, localeKey)}
+            summary={localizeText(entry.summary, localeKey)}
+            period={formatRange(entry.start, entry.end, localeKey, t("labels.present"))}
           />
         ))}
       </div>

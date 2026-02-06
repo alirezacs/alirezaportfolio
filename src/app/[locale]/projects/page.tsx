@@ -5,12 +5,13 @@ import ProjectCard from "@/components/project-card";
 import SectionHeading from "@/components/section-heading";
 
 type ProjectsPageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function ProjectsPage({ params }: ProjectsPageProps) {
-  const locale = params.locale as LocaleKey;
-  setRequestLocale(locale);
+  const { locale } = await params;
+  const localeKey = locale as LocaleKey;
+  setRequestLocale(localeKey);
 
   const t = await getTranslations();
   const projects = await getProjects();
@@ -30,8 +31,8 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
         {projects.map((project) => (
           <ProjectCard
             key={project.slug}
-            title={localizeText(project.title, locale)}
-            summary={localizeText(project.summary, locale)}
+            title={localizeText(project.title, localeKey)}
+            summary={localizeText(project.summary, localeKey)}
             tech={project.tech}
             demoUrl={project.demoUrl}
             repoUrl={project.repoUrl}

@@ -5,21 +5,22 @@ import { splitParagraphs } from "@/lib/format";
 import SectionHeading from "@/components/section-heading";
 
 type BioPageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function BioPage({ params }: BioPageProps) {
-  const locale = params.locale as LocaleKey;
-  setRequestLocale(locale);
+  const { locale } = await params;
+  const localeKey = locale as LocaleKey;
+  setRequestLocale(localeKey);
 
   const t = await getTranslations();
   const bio = await getBio();
 
-  const headline = localizeText(bio.headline, locale);
-  const summary = localizeText(bio.summary, locale);
-  const story = localizeText(bio.story, locale);
+  const headline = localizeText(bio.headline, localeKey);
+  const summary = localizeText(bio.summary, localeKey);
+  const story = localizeText(bio.story, localeKey);
   const paragraphs = splitParagraphs(story || summary);
-  const location = localizeText(bio.location, locale);
+  const location = localizeText(bio.location, localeKey);
 
   return (
     <section className="flex flex-col gap-10">

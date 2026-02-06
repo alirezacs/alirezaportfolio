@@ -1,16 +1,17 @@
 ﻿import Link from "next/link";
 
 type NotFoundProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
-export default function NotFound({ params }: NotFoundProps) {
+export default async function NotFound({ params }: NotFoundProps) {
+  const { locale } = await params;
   return (
     <div className="flex flex-col items-center gap-4 py-20 text-center">
       <h1 className="text-3xl font-semibold text-ink">Page not found</h1>
       <p className="text-muted">The page you are looking for doesn’t exist.</p>
       <Link
-        href={`/${params.locale}`}
+        href={`/${locale}`}
         className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white"
       >
         Back to home
