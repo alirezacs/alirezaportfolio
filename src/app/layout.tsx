@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { Sora, Vazirmatn } from "next/font/google";
+﻿import type { Metadata } from "next";
+import { Sora, Vazirmatn, Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -10,7 +10,13 @@ const sora = Sora({
 });
 
 const vazirmatn = Vazirmatn({
-  variable: "--font-vazirmatn",
+  variable: "--font-persian",
+  subsets: ["arabic"],
+  display: "swap",
+});
+
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  variable: "--font-arabic",
   subsets: ["arabic"],
   display: "swap",
 });
@@ -31,7 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${sora.variable} ${vazirmatn.variable} antialiased`}>
+      <body
+        className={`${sora.variable} ${vazirmatn.variable} ${notoNaskhArabic.variable} antialiased`}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
