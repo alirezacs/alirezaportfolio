@@ -10,6 +10,7 @@ const localeOptions = locales.map((value) => ({
 }));
 
 const localeSet = new Set(locales);
+const COOKIE_NAME = "NEXT_LOCALE";
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
@@ -18,16 +19,19 @@ export default function LocaleSwitcher() {
     const nextLocale = event.target.value as Locale;
     if (nextLocale === locale) return;
 
-    const { pathname, search, hash } = window.location;
+    const { pathname, search, hash, protocol } = window.location;
     const segments = pathname.split("/").filter(Boolean);
     const rest = localeSet.has(segments[0] as Locale)
       ? segments.slice(1)
       : segments;
     const basePath = rest.join("/");
     const prefix = nextLocale === defaultLocale ? "" : `/${nextLocale}`;
-    const nextPath = `${prefix}/${basePath}`.replace(/\/+$/, "");
+    const nextPath = `${prefix}${basePath ? `/${basePath}` : ""}` || "/";
 
-    window.location.assign(nextPath || "/" + (search || "") + (hash || ""));
+    const secureFlag = protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${COOKIE_NAME}=${nextLocale}; path=/; max-age=31536000; SameSite=Lax${secureFlag}`;
+
+    window.location.assign(`${nextPath}${search}${hash}`);
   };
 
   return (

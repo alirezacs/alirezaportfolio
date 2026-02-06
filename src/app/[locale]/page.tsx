@@ -85,7 +85,11 @@ export default async function HomePage({ params }: HomePageProps) {
               </a>
             ) : null}
           </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div
+            className={`mt-6 grid gap-4 ${
+              bio?.email ? "md:grid-cols-3" : "md:grid-cols-2"
+            }`}
+          >
             <div className="rounded-2xl border border-border bg-surface/80 p-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted">
                 {t("nav.projects")}
@@ -102,12 +106,16 @@ export default async function HomePage({ params }: HomePageProps) {
                 {experiences.length}+
               </p>
             </div>
-            <div className="rounded-2xl border border-border bg-surface/80 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted">
-                {t("labels.languages")}
-              </p>
-              <p className="mt-2 text-2xl font-semibold text-ink">4</p>
-            </div>
+            {bio?.email ? (
+              <div className="rounded-2xl border border-border bg-surface/80 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted">
+                  {t("labels.contact")}
+                </p>
+                <p className="mt-2 text-base font-semibold text-ink">
+                  {bio.email}
+                </p>
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
