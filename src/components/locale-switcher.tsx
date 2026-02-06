@@ -1,8 +1,7 @@
 ﻿"use client";
 
 import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { locales } from "@/i18n/config";
+import { defaultLocale, locales } from "@/i18n/config";
 import type { Locale } from "@/i18n/config";
 
 const localeOptions = locales.map((value) => ({
@@ -10,26 +9,35 @@ const localeOptions = locales.map((value) => ({
   label: value.toUpperCase(),
 }));
 
+const localeSet = new Set(locales);
+
 export default function LocaleSwitcher() {
-  const router = useRouter();
-  const pathname = usePathname();
   const locale = useLocale();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const nextLocale = event.target.value as Locale;
     if (nextLocale === locale) return;
-    router.replace(pathname ?? "/", { locale: nextLocale });
-    router.refresh();
+
+    const { pathname, search, hash } = window.location;
+    const segments = pathname.split("/").filter(Boolean);
+    const rest = localeSet.has(segments[0] as Locale)
+      ? segments.slice(1)
+      : segments;
+    const basePath = rest.join("/");
+    const prefix = nextLocale === defaultLocale ? "" : `/${nextLocale}`;
+    const nextPath = `${prefix}/${basePath}`.replace(/\/+$/, "");
+
+    window.location.assign(nextPath || "/" + (search || "") + (hash || ""));
   };
 
   return (
-    <label className="flex items-center gap-2 rounded-full border border-border/60 bg-surface/70 px-3 py-2 text-xs font-medium text-muted shadow-sm backdrop-blur">
+    <label className="group relative flex items-center gap-2 rounded-full border border-border/50 bg-gradient-to-r from-surface/95 to-surface/70 px-3 py-2 text-xs font-medium text-muted shadow-[0_8px_20px_rgba(15,20,30,0.08)] backdrop-blur transition hover:border-ink/20">
       <span className="sr-only">Language</span>
       <select
         aria-label="Language"
         value={locale}
         onChange={handleChange}
-        className="appearance-none bg-transparent text-xs font-semibold text-ink outline-none"
+        className="appearance-none bg-transparent pr-5 text-xs font-semibold text-ink outline-none"
       >
         {localeOptions.map((option) => (
           <option key={option.value} value={option.value}>
@@ -37,7 +45,9 @@ export default function LocaleSwitcher() {
           </option>
         ))}
       </select>
-      <span className="text-ink/60">▾</span>
+      <span className="pointer-events-none absolute right-3 text-ink/60 transition group-hover:text-ink">
+        ▾
+      </span>
     </label>
   );
 }
