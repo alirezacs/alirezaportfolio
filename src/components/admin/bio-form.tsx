@@ -39,14 +39,7 @@ export default function BioForm({
         name="location"
         defaultValue={defaultValues?.location}
       />
-      <div className="grid gap-4 md:grid-cols-2">
-        <Field label="Email" name="email" defaultValue={defaultValues?.email} />
-        <Field
-          label="Website"
-          name="website"
-          defaultValue={defaultValues?.website}
-        />
-      </div>
+      <Field label="Email" name="email" defaultValue={defaultValues?.email} />
       <div className="grid gap-4 md:grid-cols-2">
         <Field
           label="GitHub"

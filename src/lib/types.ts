@@ -74,7 +74,6 @@ export type Bio = {
   story: LocalizedText;
   location: LocalizedText;
   email: string;
-  website?: string;
   github?: string;
   linkedin?: string;
   updatedAt?: string;

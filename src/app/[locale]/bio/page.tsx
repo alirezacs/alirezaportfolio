@@ -64,11 +64,6 @@ export default async function BioPage({ params }: BioPageProps) {
               ) : null}
             </div>
             <div className="flex flex-col gap-2 text-sm">
-              {bio.website ? (
-                <a className="text-accent hover:underline" href={bio.website}>
-                  Website
-                </a>
-              ) : null}
               {bio.github ? (
                 <a className="text-accent hover:underline" href={bio.github}>
                   GitHub

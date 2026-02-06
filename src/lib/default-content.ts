@@ -140,7 +140,6 @@ export const defaultBio: Bio = {
   ),
   location: text("Tehran, Iran"),
   email: "hello@example.com",
-  website: "https://example.com",
   github: "https://github.com/example",
   linkedin: "https://linkedin.com/in/example",
 };
