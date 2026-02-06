@@ -7,7 +7,7 @@ import SiteFooter from "@/components/site-footer";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export function generateStaticParams() {
@@ -18,7 +18,7 @@ export default async function LocaleLayout({
   children,
   params,
 }: LocaleLayoutProps) {
-  const { locale } = params;
+  const { locale } = await params;
 
   if (!locales.includes(locale as Locale)) {
     notFound();
