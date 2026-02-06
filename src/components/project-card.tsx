@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+﻿import type { Project } from "@/lib/types";
 
 type ProjectCardProps = {
   title: string;
@@ -6,7 +6,6 @@ type ProjectCardProps = {
   tech: string[];
   demoUrl?: string;
   repoUrl?: string;
-  coverImage?: string;
   featured?: boolean;
   labels: {
     featured: string;
@@ -21,23 +20,11 @@ export default function ProjectCard({
   tech,
   demoUrl,
   repoUrl,
-  coverImage,
   featured,
   labels,
 }: ProjectCardProps) {
   return (
     <article className="card overflow-hidden">
-      {coverImage ? (
-        <div className="relative h-40 w-full">
-          <Image
-            src={coverImage}
-            alt={title}
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-      ) : null}
       <div className="flex h-full flex-col gap-4 p-6">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-lg font-semibold text-ink">{title}</h3>

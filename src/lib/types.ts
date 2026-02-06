@@ -14,7 +14,6 @@ export type Project = {
   tech: string[];
   demoUrl?: string;
   repoUrl?: string;
-  coverImage?: string;
   featured: boolean;
   published: boolean;
   order: number;

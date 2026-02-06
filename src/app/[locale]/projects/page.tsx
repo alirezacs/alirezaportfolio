@@ -36,12 +36,11 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
               title={localizeText(project.title, localeKey)}
               summary={localizeText(project.summary, localeKey)}
               tech={project.tech}
-              demoUrl={project.demoUrl}
-              repoUrl={project.repoUrl}
-              coverImage={project.coverImage}
-              featured={project.featured}
-              labels={projectLabels}
-            />
+            demoUrl={project.demoUrl}
+            repoUrl={project.repoUrl}
+            featured={project.featured}
+            labels={projectLabels}
+          />
           ))}
         </div>
       ) : (

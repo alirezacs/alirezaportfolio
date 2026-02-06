@@ -18,8 +18,6 @@ export const defaultProjects: Project[] = [
     tech: ["Next.js", "MongoDB", "TypeScript", "Elastic UI"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",
-    coverImage:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
     featured: true,
     published: true,
     order: 1,
@@ -36,8 +34,6 @@ export const defaultProjects: Project[] = [
     tech: ["Next.js", "Node.js", "PostgreSQL", "Redis"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",
-    coverImage:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
     featured: true,
     published: true,
     order: 2,
@@ -54,8 +50,6 @@ export const defaultProjects: Project[] = [
     tech: ["Next.js", "React Native", "MongoDB", "Mapbox"],
     demoUrl: "https://example.com",
     repoUrl: "https://github.com/example",
-    coverImage:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1200&auto=format&fit=crop",
     featured: false,
     published: true,
     order: 3,

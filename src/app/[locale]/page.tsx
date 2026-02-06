@@ -143,10 +143,9 @@ export default async function HomePage({ params }: HomePageProps) {
                 tech={project.tech}
                 demoUrl={project.demoUrl}
                 repoUrl={project.repoUrl}
-                coverImage={project.coverImage}
-                featured={project.featured}
-                labels={projectLabels}
-              />
+              featured={project.featured}
+              labels={projectLabels}
+            />
             ))}
           </div>
         ) : (

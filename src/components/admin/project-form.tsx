@@ -80,11 +80,6 @@ export default function ProjectForm({
           defaultValue={defaultValues?.repoUrl}
         />
       </div>
-      <Field
-        label="Cover image URL"
-        name="coverImage"
-        defaultValue={defaultValues?.coverImage}
-      />
       <div className="flex flex-wrap gap-6">
         <CheckboxField
           label="Published"
