@@ -4,11 +4,12 @@ import { getEducationById } from "@/lib/content";
 import { updateEducation } from "../actions";
 
 type EducationEditPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function EducationEditPage({ params }: EducationEditPageProps) {
-  const entry = await getEducationById(params.id);
+  const { id } = await params;
+  const entry = await getEducationById(id);
 
   if (!entry) {
     notFound();
@@ -25,3 +26,4 @@ export default async function EducationEditPage({ params }: EducationEditPagePro
     </div>
   );
 }
+

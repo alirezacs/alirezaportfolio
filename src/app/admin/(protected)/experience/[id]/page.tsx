@@ -4,13 +4,14 @@ import { getExperienceById } from "@/lib/content";
 import { updateExperience } from "../actions";
 
 type ExperienceEditPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function ExperienceEditPage({
   params,
 }: ExperienceEditPageProps) {
-  const experience = await getExperienceById(params.id);
+  const { id } = await params;
+  const experience = await getExperienceById(id);
 
   if (!experience) {
     notFound();
@@ -27,3 +28,4 @@ export default async function ExperienceEditPage({
     </div>
   );
 }
+

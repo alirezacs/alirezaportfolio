@@ -59,7 +59,6 @@ export type Honor = {
   issuer: LocalizedText;
   summary: LocalizedText;
   date: string;
-  url?: string;
   published: boolean;
   order: number;
   createdAt?: string;

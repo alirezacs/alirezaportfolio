@@ -4,11 +4,12 @@ import { getHonorById } from "@/lib/content";
 import { updateHonor } from "../actions";
 
 type HonorEditPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function HonorEditPage({ params }: HonorEditPageProps) {
-  const honor = await getHonorById(params.id);
+  const { id } = await params;
+  const honor = await getHonorById(id);
 
   if (!honor) {
     notFound();
@@ -25,3 +26,4 @@ export default async function HonorEditPage({ params }: HonorEditPageProps) {
     </div>
   );
 }
+

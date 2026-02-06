@@ -30,7 +30,6 @@ export default function HonorForm({
           defaultValue={defaultValues?.order ?? 0}
         />
       </div>
-      <Field label="URL" name="url" defaultValue={defaultValues?.url} />
       <LocalizedField
         label="Title"
         name="title"

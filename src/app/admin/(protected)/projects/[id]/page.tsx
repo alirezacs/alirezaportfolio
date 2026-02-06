@@ -4,11 +4,12 @@ import { getProjectById } from "@/lib/content";
 import { updateProject } from "../actions";
 
 type ProjectEditPageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function ProjectEditPage({ params }: ProjectEditPageProps) {
-  const project = await getProjectById(params.id);
+  const { id } = await params;
+  const project = await getProjectById(id);
 
   if (!project) {
     notFound();
@@ -25,3 +26,4 @@ export default async function ProjectEditPage({ params }: ProjectEditPageProps) 
     </div>
   );
 }
+

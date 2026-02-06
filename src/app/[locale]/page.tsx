@@ -243,12 +243,11 @@ export default async function HomePage({ params }: HomePageProps) {
               {honors.slice(0, 2).map((honor, index) => (
                 <HonorCard
                   key={`${honor.title.en}-${index}`}
-                  title={localizeText(honor.title, localeKey)}
-                  issuer={localizeText(honor.issuer, localeKey)}
-                  summary={localizeText(honor.summary, localeKey)}
-                  date={honor.date}
-                  url={honor.url}
-                />
+                title={localizeText(honor.title, localeKey)}
+                issuer={localizeText(honor.issuer, localeKey)}
+                summary={localizeText(honor.summary, localeKey)}
+                date={honor.date}
+              />
               ))}
             </div>
           ) : (

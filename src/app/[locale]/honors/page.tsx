@@ -28,12 +28,11 @@ export default async function HonorsPage({ params }: HonorsPageProps) {
           {honors.map((honor, index) => (
             <HonorCard
               key={`${honor.title.en}-${index}`}
-              title={localizeText(honor.title, localeKey)}
-              issuer={localizeText(honor.issuer, localeKey)}
-              summary={localizeText(honor.summary, localeKey)}
-              date={honor.date}
-              url={honor.url}
-            />
+            title={localizeText(honor.title, localeKey)}
+            issuer={localizeText(honor.issuer, localeKey)}
+            summary={localizeText(honor.summary, localeKey)}
+            date={honor.date}
+          />
           ))}
         </div>
       ) : (
