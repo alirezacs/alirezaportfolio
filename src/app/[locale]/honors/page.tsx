@@ -23,18 +23,22 @@ export default async function HonorsPage({ params }: HonorsPageProps) {
         title={t("sections.honors.title")}
         subtitle={t("sections.honors.subtitle")}
       />
-      <div className="grid gap-4 md:grid-cols-2">
-        {honors.map((honor, index) => (
-          <HonorCard
-            key={`${honor.title.en}-${index}`}
-            title={localizeText(honor.title, localeKey)}
-            issuer={localizeText(honor.issuer, localeKey)}
-            summary={localizeText(honor.summary, localeKey)}
-            date={honor.date}
-            url={honor.url}
-          />
-        ))}
-      </div>
+      {honors.length ? (
+        <div className="grid gap-4 md:grid-cols-2">
+          {honors.map((honor, index) => (
+            <HonorCard
+              key={`${honor.title.en}-${index}`}
+              title={localizeText(honor.title, localeKey)}
+              issuer={localizeText(honor.issuer, localeKey)}
+              summary={localizeText(honor.summary, localeKey)}
+              date={honor.date}
+              url={honor.url}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-muted">{t("empty.honors")}</p>
+      )}
     </section>
   );
 }

@@ -24,23 +24,27 @@ export default async function ExperiencePage({ params }: ExperiencePageProps) {
         title={t("sections.experience.title")}
         subtitle={t("sections.experience.subtitle")}
       />
-      <div className="grid gap-4">
-        {experiences.map((experience, index) => (
-          <ExperienceCard
-            key={`${experience.company.en}-${index}`}
-            role={localizeText(experience.role, localeKey)}
-            company={localizeText(experience.company, localeKey)}
-            summary={localizeText(experience.summary, localeKey)}
-            location={localizeText(experience.location, localeKey)}
-            period={formatRange(
-              experience.start,
-              experience.end || "",
-              localeKey,
-              t("labels.present")
-            )}
-          />
-        ))}
-      </div>
+      {experiences.length ? (
+        <div className="grid gap-4">
+          {experiences.map((experience, index) => (
+            <ExperienceCard
+              key={`${experience.company.en}-${index}`}
+              role={localizeText(experience.role, localeKey)}
+              company={localizeText(experience.company, localeKey)}
+              summary={localizeText(experience.summary, localeKey)}
+              location={localizeText(experience.location, localeKey)}
+              period={formatRange(
+                experience.start,
+                experience.end || "",
+                localeKey,
+                t("labels.present")
+              )}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-muted">{t("empty.experience")}</p>
+      )}
     </section>
   );
 }

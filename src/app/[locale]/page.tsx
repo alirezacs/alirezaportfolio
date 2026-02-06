@@ -36,9 +36,11 @@ export default async function HomePage({ params }: HomePageProps) {
     getEducation(),
   ]);
 
-  const headline = localizeText(bio.headline, localeKey) || t("hero.title");
-  const summary = localizeText(bio.summary, localeKey) || t("hero.subtitle");
-  const story = localizeText(bio.story, localeKey);
+  const headline =
+    localizeText(bio?.headline, localeKey) || t("hero.title");
+  const summary =
+    localizeText(bio?.summary, localeKey) || t("hero.subtitle");
+  const story = localizeText(bio?.story, localeKey);
   const storyParagraphs = splitParagraphs(story).slice(0, 2);
   const projectLabels = {
     featured: t("labels.featured"),
@@ -74,12 +76,14 @@ export default async function HomePage({ params }: HomePageProps) {
             >
               {t("hero.ctaPrimary")}
             </Link>
-            <a
-              href={`mailto:${bio.email}`}
-              className="rounded-full border border-border bg-surface/80 px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink/30"
-            >
-              {t("hero.ctaSecondary")}
-            </a>
+            {bio?.email ? (
+              <a
+                href={`mailto:${bio.email}`}
+                className="rounded-full border border-border bg-surface/80 px-6 py-3 text-sm font-semibold text-ink transition hover:border-ink/30"
+              >
+                {t("hero.ctaSecondary")}
+              </a>
+            ) : null}
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border border-border bg-surface/80 p-4">
@@ -121,21 +125,25 @@ export default async function HomePage({ params }: HomePageProps) {
             </Link>
           }
         />
-        <div className="grid gap-6 md:grid-cols-2">
-          {projectsToShow.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              title={localizeText(project.title, localeKey)}
-              summary={localizeText(project.summary, localeKey)}
-              tech={project.tech}
-              demoUrl={project.demoUrl}
-              repoUrl={project.repoUrl}
-              coverImage={project.coverImage}
-              featured={project.featured}
-              labels={projectLabels}
-            />
-          ))}
-        </div>
+        {projectsToShow.length ? (
+          <div className="grid gap-6 md:grid-cols-2">
+            {projectsToShow.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                title={localizeText(project.title, localeKey)}
+                summary={localizeText(project.summary, localeKey)}
+                tech={project.tech}
+                demoUrl={project.demoUrl}
+                repoUrl={project.repoUrl}
+                coverImage={project.coverImage}
+                featured={project.featured}
+                labels={projectLabels}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-muted">{t("empty.projects")}</p>
+        )}
       </section>
 
       <section className="grid gap-8 md:grid-cols-[2fr_1fr]">
@@ -152,23 +160,27 @@ export default async function HomePage({ params }: HomePageProps) {
               </Link>
             }
           />
-          <div className="grid gap-4">
-            {experiences.slice(0, 2).map((experience, index) => (
-              <ExperienceCard
-                key={`${experience.company.en}-${index}`}
-                role={localizeText(experience.role, localeKey)}
-                company={localizeText(experience.company, localeKey)}
-                summary={localizeText(experience.summary, localeKey)}
-                location={localizeText(experience.location, localeKey)}
-                period={formatRange(
-                  experience.start,
-                  experience.end || "",
-                  localeKey,
-                  t("labels.present")
-                )}
-              />
-            ))}
-          </div>
+          {experiences.length ? (
+            <div className="grid gap-4">
+              {experiences.slice(0, 2).map((experience, index) => (
+                <ExperienceCard
+                  key={`${experience.company.en}-${index}`}
+                  role={localizeText(experience.role, localeKey)}
+                  company={localizeText(experience.company, localeKey)}
+                  summary={localizeText(experience.summary, localeKey)}
+                  location={localizeText(experience.location, localeKey)}
+                  period={formatRange(
+                    experience.start,
+                    experience.end || "",
+                    localeKey,
+                    t("labels.present")
+                  )}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted">{t("empty.experience")}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-6">
@@ -184,19 +196,23 @@ export default async function HomePage({ params }: HomePageProps) {
               </Link>
             }
           />
-          <div className="card p-6">
-            <p className="text-lg font-semibold text-ink">{bio.name}</p>
-            <p className="text-sm text-muted">{headline}</p>
-            <div className="mt-4 space-y-3 text-sm text-muted">
-              {storyParagraphs.length ? (
-                storyParagraphs.map((paragraph, index) => (
-                  <p key={`${paragraph.slice(0, 8)}-${index}`}>{paragraph}</p>
-                ))
-              ) : (
-                <p>{summary}</p>
-              )}
+          {bio ? (
+            <div className="card p-6">
+              <p className="text-lg font-semibold text-ink">{bio.name}</p>
+              <p className="text-sm text-muted">{headline}</p>
+              <div className="mt-4 space-y-3 text-sm text-muted">
+                {storyParagraphs.length ? (
+                  storyParagraphs.map((paragraph, index) => (
+                    <p key={`${paragraph.slice(0, 8)}-${index}`}>{paragraph}</p>
+                  ))
+                ) : (
+                  <p>{summary}</p>
+                )}
+              </div>
             </div>
-          </div>
+          ) : (
+            <p className="text-sm text-muted">{t("empty.bio")}</p>
+          )}
         </div>
       </section>
 
@@ -214,18 +230,22 @@ export default async function HomePage({ params }: HomePageProps) {
               </Link>
             }
           />
-          <div className="grid gap-4">
-            {honors.slice(0, 2).map((honor, index) => (
-              <HonorCard
-                key={`${honor.title.en}-${index}`}
-                title={localizeText(honor.title, localeKey)}
-                issuer={localizeText(honor.issuer, localeKey)}
-                summary={localizeText(honor.summary, localeKey)}
-                date={honor.date}
-                url={honor.url}
-              />
-            ))}
-          </div>
+          {honors.length ? (
+            <div className="grid gap-4">
+              {honors.slice(0, 2).map((honor, index) => (
+                <HonorCard
+                  key={`${honor.title.en}-${index}`}
+                  title={localizeText(honor.title, localeKey)}
+                  issuer={localizeText(honor.issuer, localeKey)}
+                  summary={localizeText(honor.summary, localeKey)}
+                  date={honor.date}
+                  url={honor.url}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted">{t("empty.honors")}</p>
+          )}
         </div>
         <div className="flex flex-col gap-6">
           <SectionHeading
@@ -240,18 +260,22 @@ export default async function HomePage({ params }: HomePageProps) {
               </Link>
             }
           />
-          <div className="grid gap-4">
-            {education.slice(0, 2).map((entry, index) => (
-              <EducationCard
-                key={`${entry.school.en}-${index}`}
-                degree={localizeText(entry.degree, localeKey)}
-                school={localizeText(entry.school, localeKey)}
-                field={localizeText(entry.field, localeKey)}
-                summary={localizeText(entry.summary, localeKey)}
-                period={formatRange(entry.start, entry.end, localeKey, t("labels.present"))}
-              />
-            ))}
-          </div>
+          {education.length ? (
+            <div className="grid gap-4">
+              {education.slice(0, 2).map((entry, index) => (
+                <EducationCard
+                  key={`${entry.school.en}-${index}`}
+                  degree={localizeText(entry.degree, localeKey)}
+                  school={localizeText(entry.school, localeKey)}
+                  field={localizeText(entry.field, localeKey)}
+                  summary={localizeText(entry.summary, localeKey)}
+                  period={formatRange(entry.start, entry.end, localeKey, t("labels.present"))}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted">{t("empty.education")}</p>
+          )}
         </div>
       </section>
     </div>

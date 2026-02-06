@@ -9,15 +9,11 @@ import {
   LocaleKey,
   Project,
 } from "./types";
-import {
-  defaultBio,
-  defaultEducation,
-  defaultExperiences,
-  defaultHonors,
-  defaultProjects,
-} from "./default-content";
 
-export function localizeText(text: LocalizedText, locale: LocaleKey) {
+export function localizeText(
+  text: LocalizedText | null | undefined,
+  locale: LocaleKey
+) {
   return text?.[locale] || text?.en || "";
 }
 
@@ -30,9 +26,9 @@ export async function getProjects() {
       .sort({ order: 1, createdAt: -1 })
       .toArray();
 
-    return items.length ? items : defaultProjects;
+    return items;
   } catch {
-    return defaultProjects;
+    return [];
   }
 }
 
@@ -45,9 +41,9 @@ export async function getExperiences() {
       .sort({ order: 1, start: -1 })
       .toArray();
 
-    return items.length ? items : defaultExperiences;
+    return items;
   } catch {
-    return defaultExperiences;
+    return [];
   }
 }
 
@@ -60,9 +56,9 @@ export async function getEducation() {
       .sort({ order: 1, start: -1 })
       .toArray();
 
-    return items.length ? items : defaultEducation;
+    return items;
   } catch {
-    return defaultEducation;
+    return [];
   }
 }
 
@@ -75,9 +71,9 @@ export async function getHonors() {
       .sort({ order: 1, date: -1 })
       .toArray();
 
-    return items.length ? items : defaultHonors;
+    return items;
   } catch {
-    return defaultHonors;
+    return [];
   }
 }
 
@@ -85,9 +81,9 @@ export async function getBio() {
   try {
     const db = await getDb();
     const item = await db.collection<Bio>("bio").findOne({});
-    return item ?? defaultBio;
+    return item ?? null;
   } catch {
-    return defaultBio;
+    return null;
   }
 }
 

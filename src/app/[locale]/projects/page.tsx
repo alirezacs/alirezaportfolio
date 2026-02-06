@@ -28,21 +28,25 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
         title={t("sections.projects.title")}
         subtitle={t("sections.projects.subtitle")}
       />
-      <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard
-            key={project.slug}
-            title={localizeText(project.title, localeKey)}
-            summary={localizeText(project.summary, localeKey)}
-            tech={project.tech}
-            demoUrl={project.demoUrl}
-            repoUrl={project.repoUrl}
-            coverImage={project.coverImage}
-            featured={project.featured}
-            labels={projectLabels}
-          />
-        ))}
-      </div>
+      {projects.length ? (
+        <div className="grid gap-6 md:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              title={localizeText(project.title, localeKey)}
+              summary={localizeText(project.summary, localeKey)}
+              tech={project.tech}
+              demoUrl={project.demoUrl}
+              repoUrl={project.repoUrl}
+              coverImage={project.coverImage}
+              featured={project.featured}
+              labels={projectLabels}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-muted">{t("empty.projects")}</p>
+      )}
     </section>
   );
 }

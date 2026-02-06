@@ -55,5 +55,12 @@
   "footer": {
     "tagline": "Web, mobil ve veri için ürün deneyimleri.",
     "contact": "Birlikte etkili bir şey üretelim."
+  },
+  "empty": {
+    "projects": "Henüz proje yok.",
+    "experience": "Henüz deneyim yok.",
+    "honors": "Henüz ödül yok.",
+    "education": "Henüz eğitim bilgisi yok.",
+    "bio": "Biyografi henüz ayarlanmadı."
   }
 }

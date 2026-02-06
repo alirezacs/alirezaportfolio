@@ -55,5 +55,12 @@
   "footer": {
     "tagline": "Crafting product experiences across web, mobile, and data.",
     "contact": "Let’s build something thoughtful together."
+  },
+  "empty": {
+    "projects": "No projects yet.",
+    "experience": "No experience yet.",
+    "honors": "No honors yet.",
+    "education": "No education yet.",
+    "bio": "Biography is not set yet."
   }
 }

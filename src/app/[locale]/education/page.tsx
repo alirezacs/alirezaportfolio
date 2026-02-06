@@ -24,18 +24,22 @@ export default async function EducationPage({ params }: EducationPageProps) {
         title={t("sections.education.title")}
         subtitle={t("sections.education.subtitle")}
       />
-      <div className="grid gap-4">
-        {education.map((entry, index) => (
-          <EducationCard
-            key={`${entry.school.en}-${index}`}
-            degree={localizeText(entry.degree, localeKey)}
-            school={localizeText(entry.school, localeKey)}
-            field={localizeText(entry.field, localeKey)}
-            summary={localizeText(entry.summary, localeKey)}
-            period={formatRange(entry.start, entry.end, localeKey, t("labels.present"))}
-          />
-        ))}
-      </div>
+      {education.length ? (
+        <div className="grid gap-4">
+          {education.map((entry, index) => (
+            <EducationCard
+              key={`${entry.school.en}-${index}`}
+              degree={localizeText(entry.degree, localeKey)}
+              school={localizeText(entry.school, localeKey)}
+              field={localizeText(entry.field, localeKey)}
+              summary={localizeText(entry.summary, localeKey)}
+              period={formatRange(entry.start, entry.end, localeKey, t("labels.present"))}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-muted">{t("empty.education")}</p>
+      )}
     </section>
   );
 }
