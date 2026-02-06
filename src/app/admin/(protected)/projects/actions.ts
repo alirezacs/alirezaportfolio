@@ -1,6 +1,8 @@
 ﻿"use server";
 
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { getDb } from "@/lib/db";
 import {
@@ -9,6 +11,7 @@ import {
   parseString,
   parseStringArray,
 } from "@/lib/forms";
+import { locales } from "@/i18n/config";
 
 const slugify = (value: string) =>
   value
@@ -44,6 +47,12 @@ export async function createProject(formData: FormData) {
   };
 
   await db.collection("projects").insertOne(payload);
+  revalidatePath("/admin/projects");
+  for (const locale of locales) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/projects`);
+  }
+  redirect("/admin/projects?created=1");
 }
 
 export async function updateProject(formData: FormData) {
@@ -79,6 +88,13 @@ export async function updateProject(formData: FormData) {
   await db
     .collection("projects")
     .updateOne({ _id: new ObjectId(id) }, { $set: payload });
+
+  revalidatePath("/admin/projects");
+  for (const locale of locales) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/projects`);
+  }
+  redirect("/admin/projects?updated=1");
 }
 
 export async function deleteProject(formData: FormData) {
@@ -91,5 +107,10 @@ export async function deleteProject(formData: FormData) {
   }
 
   await db.collection("projects").deleteOne({ _id: new ObjectId(id) });
+  revalidatePath("/admin/projects");
+  for (const locale of locales) {
+    revalidatePath(`/${locale}`);
+    revalidatePath(`/${locale}/projects`);
+  }
+  redirect("/admin/projects?deleted=1");
 }
-
