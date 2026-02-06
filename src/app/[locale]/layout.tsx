@@ -1,7 +1,7 @@
 ﻿import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { Locale, locales } from "@/i18n";
+import { defaultLocale, Locale, locales } from "@/i18n";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 
@@ -18,9 +18,13 @@ export default async function LocaleLayout({
   children,
   params,
 }: LocaleLayoutProps) {
-  const { locale } = await params;
+  const resolvedParams = await params;
+  const localeParam = resolvedParams?.locale;
+  const locale = locales.includes(localeParam as Locale)
+    ? (localeParam as Locale)
+    : defaultLocale;
 
-  if (!locales.includes(locale as Locale)) {
+  if (localeParam && !locales.includes(localeParam as Locale)) {
     notFound();
   }
 

@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { defaultLocale } from "@/i18n";
 import {
   getBio,
   getEducation,
@@ -21,8 +22,9 @@ type HomePageProps = {
 };
 
 export default async function HomePage({ params }: HomePageProps) {
-  const { locale } = await params;
-  const localeKey = locale as LocaleKey;
+  const resolvedParams = await params;
+  const localeKey = (resolvedParams?.locale ?? defaultLocale) as LocaleKey;
+  const locale = localeKey;
   setRequestLocale(localeKey);
 
   const t = await getTranslations();

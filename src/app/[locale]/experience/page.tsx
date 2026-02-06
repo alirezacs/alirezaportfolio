@@ -1,4 +1,5 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
+import { defaultLocale } from "@/i18n";
 import { getExperiences, localizeText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import { formatRange } from "@/lib/format";
@@ -10,8 +11,8 @@ type ExperiencePageProps = {
 };
 
 export default async function ExperiencePage({ params }: ExperiencePageProps) {
-  const { locale } = await params;
-  const localeKey = locale as LocaleKey;
+  const resolvedParams = await params;
+  const localeKey = (resolvedParams?.locale ?? defaultLocale) as LocaleKey;
   setRequestLocale(localeKey);
 
   const t = await getTranslations();

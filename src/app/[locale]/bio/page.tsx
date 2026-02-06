@@ -1,4 +1,5 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
+import { defaultLocale } from "@/i18n";
 import { getBio, localizeText } from "@/lib/content";
 import type { LocaleKey } from "@/lib/types";
 import { splitParagraphs } from "@/lib/format";
@@ -9,8 +10,8 @@ type BioPageProps = {
 };
 
 export default async function BioPage({ params }: BioPageProps) {
-  const { locale } = await params;
-  const localeKey = locale as LocaleKey;
+  const resolvedParams = await params;
+  const localeKey = (resolvedParams?.locale ?? defaultLocale) as LocaleKey;
   setRequestLocale(localeKey);
 
   const t = await getTranslations();
